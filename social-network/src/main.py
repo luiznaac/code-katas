@@ -23,6 +23,7 @@ def perform_action(user_action: str):
     if ' follows ' in user_action:
         follow(*user_action.split(' follows '))
         return
+    print_user_posts(user_action)
 
 
 def post_message(user, message):
@@ -37,6 +38,12 @@ def print_wall(user):
 
 def follow(user, followed_user):
     follows_repository.resolve().save_follow(Follow(user, followed_user))
+
+
+def print_user_posts(user):
+    posts = posts_repository.resolve().get_user_posts(user)
+    for post in posts:
+        printer(post.text)
 
 
 if __name__ == '__main__':

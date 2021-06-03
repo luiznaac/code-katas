@@ -49,6 +49,16 @@ class TestMain(unittest.TestCase):
         self.assertEqual('Jakubiaki', follows_1[1].followed_user)
         self.assertEqual('Jakubiaki', follows_2[0].followed_user)
 
+    def test_print_user_posts(self):
+        main.perform_action('Rafaelfo -> brilha muito')
+        main.perform_action('Morales -> no curintia')
+
+        main.perform_action('Morales')
+        main.perform_action('Rafaelfo')
+
+        self.assertEqual('no curintia', printed[0])
+        self.assertEqual('brilha muito', printed[1])
+
 
 printed = []
 
