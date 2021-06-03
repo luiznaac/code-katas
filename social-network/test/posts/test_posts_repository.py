@@ -15,7 +15,8 @@ class TestPostsRepository(unittest.TestCase):
         repository.save_post(post)
         actual_post = repository.get_user_posts(user)[0]
 
-        self.assertEqual(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), actual_post.created_at)
+        datetime_format = '%Y-%m-%d %H:%M:%S'
+        self.assertEqual(datetime.now().strftime(datetime_format), actual_post.created_at.strftime(datetime_format))
 
     def test_save_and_get_user_posts(self):
         user_1 = 'Rafaelfo'

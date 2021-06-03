@@ -16,7 +16,7 @@ class InMemoryPostsRepository(PostsRepository):
     saved_posts = []
 
     def save_post(self, post: Post):
-        post.created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.created_at = datetime.now()
         self.saved_posts.append(post)
 
     def get_user_posts(self, user):
