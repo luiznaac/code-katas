@@ -25,3 +25,7 @@ class InMemoryPostsRepository(PostsRepository):
 
 def resolve() -> PostsRepository:
     return InMemoryPostsRepository()
+
+
+def reset():
+    InMemoryPostsRepository.saved_posts = []

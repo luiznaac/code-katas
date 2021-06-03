@@ -1,6 +1,8 @@
 from src.posts import posts_repository
 from src.posts.post import Post
 from src.wall.wall_service import WallService
+from src.follows import follows_repository
+from src.follows.follow import Follow
 
 printer = print
 
@@ -18,6 +20,9 @@ def perform_action(user_action: str):
     if ' wall' in user_action:
         print_wall(user_action.strip(' wall'))
         return
+    if ' follows ' in user_action:
+        follow(*user_action.split(' follows '))
+        return
 
 
 def post_message(user, message):
@@ -28,6 +33,10 @@ def print_wall(user):
     posts = WallService(user).build_wall()
     for post in posts:
         printer('{} - {}'.format(post.user, post.text))
+
+
+def follow(user, followed_user):
+    follows_repository.resolve().save_follow(Follow(user, followed_user))
 
 
 if __name__ == '__main__':

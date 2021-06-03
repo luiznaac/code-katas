@@ -23,3 +23,7 @@ class InMemoryFollowsRepository(FollowsRepository):
 
 def resolve() -> FollowsRepository:
     return InMemoryFollowsRepository()
+
+
+def reset():
+    InMemoryFollowsRepository.saved_follows = []

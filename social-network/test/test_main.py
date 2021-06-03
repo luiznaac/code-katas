@@ -1,12 +1,18 @@
 import unittest
 from src import main
 from src.posts import posts_repository
+from src.follows import follows_repository
 
 
 class TestMain(unittest.TestCase):
 
     def setUp(self):
         main.printer = mocked_print
+
+    def tearDown(self):
+        posts_repository.reset()
+        follows_repository.reset()
+        reset_mocked_printer()
 
     def test_post_message(self):
         main.perform_action('Rafaelfo -> e ai meus consagrados')
@@ -30,12 +36,29 @@ class TestMain(unittest.TestCase):
         self.assertEqual('Morales - jesus', printed[1])
         self.assertEqual('Morales - me ajuda', printed[2])
 
+    def test_follow(self):
+        main.perform_action('Rafaelfo follows Morales')
+        main.perform_action('Rafaelfo follows Jakubiaki')
+        main.perform_action('Morales follows Jakubiaki')
+        follows_repo = follows_repository.resolve()
+
+        follows_1 = follows_repo.get_user_follows('Rafaelfo')
+        follows_2 = follows_repo.get_user_follows('Morales')
+
+        self.assertEqual('Morales', follows_1[0].followed_user)
+        self.assertEqual('Jakubiaki', follows_1[1].followed_user)
+        self.assertEqual('Jakubiaki', follows_2[0].followed_user)
+
 
 printed = []
 
 
 def mocked_print(text):
     printed.append(text)
+
+
+def reset_mocked_printer():
+    printed.clear()
 
 
 if __name__ == '__main__':
