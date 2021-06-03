@@ -3,6 +3,7 @@ from src.posts.post import Post
 from src.wall.wall_service import WallService
 from src.follows import follows_repository
 from src.follows.follow import Follow
+from datetime import datetime
 
 printer = print
 
@@ -33,7 +34,20 @@ def post_message(user, message):
 def print_wall(user):
     posts = WallService(user).build_wall()
     for post in posts:
-        printer('{} - {}'.format(post.user, post.text))
+        printer('{} - {} ({} ago)'.format(post.user, post.text, format_time_ago(post.created_at)))
+
+
+def format_time_ago(time_posted):
+    now = datetime.now()
+    delta = str(now - time_posted).split('.')[0].split(':')
+
+    if int(delta[0]) > 0:
+        return '{} hours and {} minutes'.format(delta[0], delta[1])
+
+    if int(delta[1]) > 0:
+        return '{} minutes'.format(delta[1])
+
+    return '{} seconds'.format(delta[2])
 
 
 def follow(user, followed_user):

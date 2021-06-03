@@ -23,6 +23,6 @@ class WallService:
         posts_repo = posts_repository.resolve()
         posts = list(map(lambda user: posts_repo.get_user_posts(user), users))
         flattened_posts = [post for user_posts in posts for post in user_posts]
-        flattened_posts.sort(key=lambda post: post.created_at)
+        flattened_posts.sort(key=lambda post: post.created_at, reverse=True)
 
         return flattened_posts

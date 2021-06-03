@@ -17,13 +17,13 @@ class TestWallService(unittest.TestCase):
         wall_service_2 = WallService('Paranaue')
         wall_posts_2 = wall_service_2.build_wall()
 
-        self.assertEqual('E ai galera!', wall_posts_1[0].text)
-        self.assertEqual('Primeiro post por aqui :)', wall_posts_1[1].text)
-        self.assertEqual('Top d+', wall_posts_1[2].text)
-        self.assertEqual('ANALISE', wall_posts_1[3].text)
+        self.assertEqual('ANALISE', wall_posts_1[0].text)
+        self.assertEqual('Top d+', wall_posts_1[1].text)
+        self.assertEqual('Primeiro post por aqui :)', wall_posts_1[2].text)
+        self.assertEqual('E ai galera!', wall_posts_1[3].text)
 
-        self.assertEqual('Top d+', wall_posts_2[0].text)
-        self.assertEqual('inhai', wall_posts_2[1].text)
+        self.assertEqual('inhai', wall_posts_2[0].text)
+        self.assertEqual('Top d+', wall_posts_2[1].text)
 
     def prepare_scenario(self):
         user_1 = 'Rafaelfo'

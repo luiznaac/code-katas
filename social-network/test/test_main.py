@@ -32,9 +32,9 @@ class TestMain(unittest.TestCase):
         main.perform_action('Rafaelfo wall')
         main.perform_action('Morales wall')
 
-        self.assertEqual('Rafaelfo - e ai meus consagrados', printed[0])
-        self.assertEqual('Morales - jesus', printed[1])
-        self.assertEqual('Morales - me ajuda', printed[2])
+        self.assertTrue('Rafaelfo - e ai meus consagrados' in printed[0])
+        self.assertTrue('Morales - me ajuda' in printed[1])
+        self.assertTrue('Morales - jesus' in printed[2])
 
     def test_follow(self):
         main.perform_action('Rafaelfo follows Morales')
